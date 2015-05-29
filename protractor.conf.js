@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports.config = {
     framework: 'mocha',
     specs: [

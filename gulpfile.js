@@ -1,16 +1,18 @@
+'use strict';
+
 var gulp =          require('gulp'),
     concat =        require('gulp-concat'),
     uglify =        require('gulp-uglify'),
     ngAnnotate =    require('gulp-ng-annotate'),
     sourcemaps =    require('gulp-sourcemaps'),
     nodemon =       require('gulp-nodemon'),
-    uglifycss =     require('gulp-uglifycss'),
-    minifyhtml =    require('gulp-minify-html')
+    //uglifycss =     require('gulp-uglifycss'),
+    minifyhtml =    require('gulp-minify-html');
 
 
-var publicPath = 'angular/public'
-var indexPath = 'angular/index.html'
-var templatesPath = 'angular/templates/*.html'
+var publicPath = 'angular/public';
+var indexPath = 'angular/index.html';
+var templatesPath = 'angular/templates/*.html';
 
 gulp.task('js', function() {
     gulp.src(['angular/js/app.js', 'angular/js/*.js'])
@@ -19,8 +21,8 @@ gulp.task('js', function() {
             .pipe(ngAnnotate())
             .pipe(uglify())
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest(publicPath))
-})
+        .pipe(gulp.dest(publicPath));
+});
 
 gulp.task('css', function() {
 //    gulp.src('angular/css/*.css')
@@ -29,7 +31,7 @@ gulp.task('css', function() {
 //            .pipe(uglifycss())
 //        .pipe(sourcemaps.write())
 //        .pipe(gulp.dest(publicPath))
-})
+});
 
 gulp.task('html', function() {
     var opts = {
@@ -39,28 +41,28 @@ gulp.task('html', function() {
 
     gulp.src([indexPath, templatesPath])
         .pipe(minifyhtml(opts))
-        .pipe(gulp.dest(publicPath))
-})
+        .pipe(gulp.dest(publicPath));
+});
 
 gulp.task('watch:js', ['js'], function() {
-    gulp.watch('webapp/js/*.js', ['js'])
-})
+    gulp.watch('webapp/js/*.js', ['js']);
+});
 
 gulp.task('watch:html', ['html'], function() {
-    gulp.watch('webapp/**/*.html', ['html'])
-})
+    gulp.watch('webapp/**/*.html', ['html']);
+});
 
 gulp.task('watch:css', ['css'], function() {
-    //gulp.watch('webapp/css/*.css', ['css'])
-})
+    //gulp.watch('webapp/css/*.css', ['css']);
+});
 
-gulp.task('dev', ['watch:js', 'watch:css', 'watch:html', 'dev:server'])
+gulp.task('dev', ['watch:js', 'watch:css', 'watch:html', 'dev:server']);
 
 gulp.task('dev:server', function() {
     nodemon({
         script: './server/server.js',
         ext:    'js',
         ignore: ['gulp*', 'angular/*']
-    })
-})
+    });
+});
 

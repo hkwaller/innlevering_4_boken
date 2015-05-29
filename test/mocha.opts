@@ -1,1 +1,4 @@
-test/server --recursive
+test/server 
+
+--recursive
+--require test/server/support/coverage
