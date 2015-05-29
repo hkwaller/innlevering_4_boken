@@ -1,0 +1,32 @@
+1.2.1 Deployment
+1. 
+
+
+2. Hvilke filer bør man laste opp til produksjonsserver? Kommer dette an på hvilken type tjeneste
+man bruker for deployment?
+
+Kun de filene som er relevante. Ikke server filer som andre ikke skal ha tilgang til.
+
+
+3. Hvilke viktige fordeler er det å hente ved å ”kompilere” (minify-e og obfuskere) statiske kode-assets (HTML, CSS, og JavaScript)?
+
+Gjøre det vanskeligere for andre å se koden men også få en raskere applikasjon ved fjerning av unødvendige tegn, whitespaces og returns etc.
+
+
+
+1.2.2 API-versjonering
+1. Hvorfor er API-versjonering viktig?
+
+For å at ikke gammel kode skal krasje ved oppdateringer så er det viktig å versjonere API. Det gir også mulighet å gjennomføre tester med brukere før det lanseres. 
+
+
+2. Når bør man begynne å tenke på mulighet for å versjonere et API?
+
+
+
+
+3. Hvilke (tre) viktige modeller for API-versjonering brukes i dag, og hva er de viktigste forskjellene?
+Er noen bedre enn andre?
+
+
+4. Når bør man droppe støtte for eldre versjoner av et API?

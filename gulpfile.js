@@ -6,6 +6,7 @@ var gulp =          require('gulp'),
     ngAnnotate =    require('gulp-ng-annotate'),
     sourcemaps =    require('gulp-sourcemaps'),
     nodemon =       require('gulp-nodemon'),
+    livereload =    require('gulp-livereload'),
     //uglifycss =     require('gulp-uglifycss'),
     minifyhtml =    require('gulp-minify-html');
 
@@ -21,7 +22,8 @@ gulp.task('js', function() {
             .pipe(ngAnnotate())
             .pipe(uglify())
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest(publicPath));
+        .pipe(gulp.dest(publicPath))
+        .pipe(livereload());
 });
 
 gulp.task('css', function() {
@@ -41,7 +43,8 @@ gulp.task('html', function() {
 
     gulp.src([indexPath, templatesPath])
         .pipe(minifyhtml(opts))
-        .pipe(gulp.dest(publicPath));
+        .pipe(gulp.dest(publicPath))
+        .pipe(livereload());
 });
 
 gulp.task('watch:js', ['js'], function() {
@@ -56,7 +59,9 @@ gulp.task('watch:css', ['css'], function() {
     //gulp.watch('webapp/css/*.css', ['css']);
 });
 
-gulp.task('dev', ['watch:js', 'watch:css', 'watch:html', 'dev:server']);
+gulp.task('dev', ['watch:js', 'watch:css', 'watch:html', 'dev:server'], function() {
+    livereload.listen()
+});
 
 gulp.task('dev:server', function() {
     nodemon({

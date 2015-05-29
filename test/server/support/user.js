@@ -1,10 +1,11 @@
+'use strict';
+
 var bcrypt =        require('bcrypt'),
     jwt =           require('jsonwebtoken'),
     config =        require('../../../server/secrets'),
     User =          require('../../../server/models/user');
 
 exports.create = function(username, password, cb) {
-    'use strict';
     
     var user = new User({username: username});
     

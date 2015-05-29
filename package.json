@@ -13,16 +13,18 @@
     "gulp-uglify": "^1.2.0",
     "gulp-uglifycss": "^1.0.4",
     "jsonwebtoken": "^5.0.1",
-    "jwt-simple": "^0.3.0"
+    "jwt-simple": "^0.3.0",
+    "lodash": "^3.7.0"
   },
   "scripts": {
-    "postinstall": "cd angular && npm install && cd ../server && npm install",
+    "postinstall": "cd angular && npm install && cd ../server && npm install && npm install --save lodash",
     "test": "./node_modules/.bin/jshint . && ./node_modules/.bin/mocha -R nyan && ./node_modules/.bin/protractor",
-    "coverage": "./node_modules/.bin/mocha -R html-cov && open coverage.html"
+    "start": "gulp dev"
   },
   "devDependencies": {
     "blanket": "^1.1.7",
     "chai": "^2.3.0",
+    "gulp-livereload": "^3.8.0",
     "karma": "^0.12.33",
     "karma-chai": "^0.1.0",
     "karma-mocha": "^0.1.10",
