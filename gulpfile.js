@@ -48,11 +48,11 @@ gulp.task('html', function() {
 });
 
 gulp.task('watch:js', ['js'], function() {
-    gulp.watch('webapp/js/*.js', ['js']);
+    gulp.watch('angular/js/*.js', ['js']);
 });
 
 gulp.task('watch:html', ['html'], function() {
-    gulp.watch('webapp/**/*.html', ['html']);
+    gulp.watch('angular/**/*.html', ['html']);
 });
 
 gulp.task('watch:css', ['css'], function() {
@@ -60,7 +60,7 @@ gulp.task('watch:css', ['css'], function() {
 });
 
 gulp.task('dev', ['watch:js', 'watch:css', 'watch:html', 'dev:server'], function() {
-    livereload.listen()
+    livereload.listen();
 });
 
 gulp.task('dev:server', function() {

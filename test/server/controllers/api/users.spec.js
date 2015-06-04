@@ -1,8 +1,10 @@
 var expect =            require('chai').expect,
     ctrl =              require('../../../../server/controllers/albums'),
     api =               require('../../support/api'),
-    user =              require('../../support/user')    
-    
+    User =              require('../../../../server/models/user'),   
+    testUser =          require('../../support/user'),   
+    jwt =               require('jwt-simple'),
+    secret =            require('../../../../server/secrets')
 
 describe('controllers.users', function() {
     it('exists', function() {
@@ -11,31 +13,36 @@ describe('controllers.users', function() {
 })
 
 describe('controllers.api.users', function() {
+    var token;
+    var currentUser = { username: 'test', password: 'test' }
     
-//    describe('POST /api/users', function () {
-//        var user =  { username: 'test', password: 'test' }
-//
-//        beforeEach(function (done) {
-//            api.post('/users')
-//                .send(user)
-//                .expect(200)
-//                .end(done)
-//        })
-//
-//        it('has one registered user', function (done) {
-//            user.find()
-//                .exec(function(err, users) {
-//                    if (err) done(err)
-//                    expect(users).to.have.length(1);
-//                    done();
-//                });
-//        })
-//
-//        it('username already exists', function (done) {
-//            api.post('/users')
-//                .send(user)
-//                .expect(401)
-//                .end(done)
-//        })
-//    })
+    describe('POST /api/users', function() {
+        
+        beforeEach(function (done) {
+            User.remove({}, function (err) {
+                if (err) console.log(err)
+            });
+            
+            api.post('/users')
+                .send(currentUser)
+                .expect(201)
+                .end(done)
+        })
+    
+        it('has one registered user', function (done) {
+            User.findOne()
+                .exec(function(err, user) {
+                    if (err) done(err)
+                    expect(currentUser).to.exist;
+                    done();
+                });
+        })
+        
+        it('fails to register already registered username', function(done) {
+            api.post('/users')
+                .send(currentUser)
+                .expect(412)
+                .end(done)
+        })
+    })
 })

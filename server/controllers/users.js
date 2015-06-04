@@ -16,13 +16,15 @@ router.post('/', function (req, res) {
 
         var newUser = new User({
             username: req.body.username,
-            passwordHash: passwordHash
+            password: passwordHash
         });
-
+        
         newUser.save(function () {
             return res.status(201).json(newUser);
         });
     });
 });
+
+
 
 module.exports = router;

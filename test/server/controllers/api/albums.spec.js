@@ -2,7 +2,9 @@ var expect =            require('chai').expect,
     ctrl =              require('../../../../server/controllers/albums'),
     api =               require('../../support/api'),
     Album =             require('../../../../server/models/album'),
-    user =              require('../../support/user')    
+    user =              require('../../support/user'),  
+    secret =            require('../../../../server/secrets'),
+    jwt =               require('jwt-simple')
     
 
 describe('controllers.albums', function() {
@@ -12,15 +14,16 @@ describe('controllers.albums', function() {
 })
 
 describe('controllers.api.albums', function() {
-    var token
-        
+    var token;
+    var notarealtoken = jwt.encode({username: "notarealuser"}, secret.jwt);
+    
     beforeEach(function(done) {
         Album.remove({}, function(err) {
             if (err) console.log(err)
         })
 
-        user.create('test', 'test', function(err, user) {
-            token = user.token
+        user.create('test', 'test', function(err, newUser) {
+            token = newUser.token
             done(err)
         })
     })
@@ -57,6 +60,7 @@ describe('controllers.api.albums', function() {
 
     describe('POST /api/albums', function() {
         var album = { title: 'Album', artist: 'Artist', creator: 'Creator', public: true };
+        
         beforeEach(function(done) {
             api.post('/albums')
                 .send(album)
@@ -79,25 +83,99 @@ describe('controllers.api.albums', function() {
             })
         })
     })
+
     
-//    describe('PUT /api/albums', function() {
-//
-//        beforeEach(function(done) {
-//            api.post('/albums')
-//                .send({ title: 'Album', artist: 'Artist', creator: 'Creator', public: true })
-//                .set('X-Auth', token)
-//                .expect(200)
-//                .end(done)
-//        })
-//        
-//        it('changes title to an album', function(done) {
-//            Album.findOne(function(err, album) {
-//                album.title = 'test';
-//                album.save(function(err, result) {
-//                    expect(result.title).to.equal('test')
-//                })
-//            })
-//        });
-//        
-//    })
+    describe("PUT /api/albums", function () {
+        var id;
+        var newToken;
+        
+        beforeEach(function (done) {
+            var album = [
+                { title: 'Album 1', artist: 'Artist 1', creator: 'test', public: false }
+            ];
+            
+            Album.create(album, function(err, album) {
+                id = album[0]._id
+                done(err)
+            })
+        })
+
+        beforeEach(function(done) {         
+            user.create('test2', 'test2', function(err, user) {
+                newToken = user.token
+                done(err)
+            })
+        })
+
+        it('throws 401 when no token present', function (done) {
+            api.put('/albums/' + id)
+                .expect(401)
+                .end(done)
+        })
+
+        it('throws 401 with a invalid token', function (done) {
+            api.put('/albums/' + id)
+                .set('X-Auth', notarealtoken)
+                .expect(401)
+                .end(done)
+        })
+
+        it('throws 401 when album belongs to other user', function (done) {
+            Album.findById(id, function (err, album) {
+                if (err) done(err)
+                api.put('/albums/' + id)
+                    .send(album)
+                    .set('X-Auth', newToken)
+                    .expect(401)
+                    .end(done)
+            })
+        })
+
+        it('changed album visibility to public', function (done) {
+            Album.findById(id, function (err,album) {
+                album.public = true
+                api.put('/albums/' + id) 
+                    .send(album)
+                    .set('X-Auth', token)
+                    .expect(200)
+                    .end(done)
+            })
+        })
+    })
+    
+    describe('DELETE /api/albums', function () {
+        var id;
+        var notarealtoken = jwt.encode({username: 'immafake'}, secret.jwt);
+
+        beforeEach(function (done) {
+            var album = [
+                { title: 'Album 1', artist: 'Artist 1', creator: 'test', public: false }
+            ];
+            
+            Album.create(album, function(err, album) {
+                id = album[0]._id
+                done(err);
+            })
+        })
+            
+        it('throws 401 when trying to delete without token', function(done) {
+            api.delete('/albums/' + id)
+                .expect(401)
+                .end(done)
+        })
+
+        it('throws 401 when trying to delete another users album', function(done) {
+            api.delete('/albums/' + id)
+                .set('X-Auth', notarealtoken)
+                .expect(401)
+                .end(done)
+        });  
+        
+        it('deletes album', function(done) {
+            api.delete('/albums/' + id) 
+                .set('X-Auth', token)
+                .expect(200)
+                .end(done)
+        })
+    })
 })

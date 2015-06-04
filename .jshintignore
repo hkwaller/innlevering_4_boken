@@ -3,5 +3,3 @@ coverage
 server/node_modules/**
 angular/node_modules/**
 angular/public/**
-angular/js/*.js
-test/**

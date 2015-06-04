@@ -3,6 +3,7 @@
   "dependencies": {
     "angular-mocks": "^1.4.0",
     "bcrypt": "^0.8.3",
+    "body-parser": "^1.12.4",
     "express": "^4.12.4",
     "gulp": "^3.8.11",
     "gulp-concat": "^2.5.2",
@@ -12,12 +13,14 @@
     "gulp-sourcemaps": "^1.5.2",
     "gulp-uglify": "^1.2.0",
     "gulp-uglifycss": "^1.0.4",
+    "jshint": "^2.8.0",
     "jsonwebtoken": "^5.0.1",
     "jwt-simple": "^0.3.0",
-    "lodash": "^3.7.0"
+    "lodash": "^3.7.0",
+    "morgan": "^1.5.3"
   },
   "scripts": {
-    "postinstall": "cd angular && npm install && cd ../server && npm install && npm install --save lodash",
+    "postinstall": "cd angular && npm install && cd ../server && npm install",
     "test": "./node_modules/.bin/jshint . && ./node_modules/.bin/mocha -R nyan && ./node_modules/.bin/protractor",
     "start": "gulp dev"
   },
@@ -25,6 +28,7 @@
     "blanket": "^1.1.7",
     "chai": "^2.3.0",
     "gulp-livereload": "^3.8.0",
+    "jshint": "^2.8.0",
     "karma": "^0.12.33",
     "karma-chai": "^0.1.0",
     "karma-mocha": "^0.1.10",
@@ -34,3 +38,4 @@
     "supertest": "^1.0.1"
   }
 }
+   

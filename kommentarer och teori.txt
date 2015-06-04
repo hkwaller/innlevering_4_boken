@@ -1,0 +1,61 @@
+
+/****************
+    KOMMENTARER
+*****************/
+
+Det mangler fortsatt noen tester, noe som fremgår i coverage.html.
+
+Dette vil bli fikset til neste levering.
+
+
+/****************
+    TEORI
+*****************/
+
+
+1.2.1 Deployment
+1. 
+
+Det viktigste er egentlig hva du får tilgang til. På en IaaS har du større kontroll over alt som hører til, mens du på en PaaS har en litt mindre boble å røre deg innen.
+
+
+
+2. Hvilke filer bør man laste opp til produksjonsserver? Kommer dette an på hvilken type tjeneste
+man bruker for deployment?
+
+Kun de filene som er relevante. Ikke server filer som andre ikke skal ha tilgang til.
+
+
+
+
+3. Hvilke viktige fordeler er det å hente ved å ”kompilere” (minify-e og obfuskere) statiske kode-assets (HTML, CSS, og JavaScript)?
+
+Gjøre det vanskeligere for andre å se koden men frem for alt å få en raskere applikasjon ved fjerning av unødvendige tegn, whitespaces og linjer etc.
+
+
+
+1.2.2 API-versjonering
+1. Hvorfor er API-versjonering viktig?
+
+For å at ikke gammel kode skal krasje ved oppdateringer så er det viktig å versjonere API. Det gir også mulighet å gjennomføre tester med brukere før nye versjoner lanseres. 
+
+
+
+2. Når bør man begynne å tenke på mulighet for å versjonere et API?
+
+Når man har gjort eller heller når man ønsker å gjøre oppdateringer som kan påvirke din egen eller andre klienter
+
+
+
+3. Hvilke (tre) viktige modeller for API-versjonering brukes i dag, og hva er de viktigste forskjellene?
+Er noen bedre enn andre?
+
+Det vanligste er å legge på versjonsnummer på api-linkene. En annen måte er å legge på versjonen i HTTP-
+headeren og til slutt kan den også ligge som en parameter i URLen. Det finnes for- og nakkdeler med alle, men den mest brukte er å ha versjonsnummer i api-linken. Dette er den mest tydlige for alle samt at den ikke byr på det største problemene med f.eks. å ha noe i HTTP-headeren da det er en utfordring hva man skal gjøre hvis man ikke har noe. Det er også mange som sperrer URL-parametere, noe som ikke er veldig heldig.
+
+
+
+4. Når bør man droppe støtte for eldre versjoner av et API?
+
+Når den enten ikke er sikker nog lenger eller når ingen bruker det lenger
+
