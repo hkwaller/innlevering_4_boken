@@ -1,4 +1,6 @@
-'use strict';
+(function () {
+   'use strict';
+}());
 
 var router = require('express').Router();
 var jwt = require('jwt-simple');

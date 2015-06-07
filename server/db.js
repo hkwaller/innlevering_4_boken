@@ -1,4 +1,6 @@
-'use strict';
+(function () {
+   'use strict';
+}());
 
 var mongoose = require('mongoose');
 

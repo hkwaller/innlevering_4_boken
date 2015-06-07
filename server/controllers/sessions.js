@@ -1,4 +1,6 @@
-'use strict';
+(function () {
+   'use strict';
+}());
 
 var router = require('express').Router();
 var bcrypt = require('bcrypt');

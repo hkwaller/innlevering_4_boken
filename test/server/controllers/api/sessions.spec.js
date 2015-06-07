@@ -1,4 +1,6 @@
-'use strict';
+(function () {
+   'use strict';
+}());
 
 var api = require('../../support/api');
 var expect = require('chai').expect;

@@ -1,4 +1,6 @@
-'use strict';
+(function () {
+   'use strict';
+}());
 
 var gulp =          require('gulp'),
     concat =        require('gulp-concat'),

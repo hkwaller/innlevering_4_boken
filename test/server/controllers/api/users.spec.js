@@ -1,4 +1,6 @@
-'use strict';
+(function () {
+   'use strict';
+}());
 
 var expect =            require('chai').expect,
     ctrl =              require('../../../../server/controllers/albums'),

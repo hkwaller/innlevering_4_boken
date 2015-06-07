@@ -1,7 +1,6 @@
-'use strict';
-
-var _ = require('lodash');
-var alert = alert;
+(function () {
+   'use strict';
+}());
 
 angular.module('app.controllers', [])
 
@@ -41,7 +40,7 @@ angular.module('app.controllers', [])
         .error(function (data, status) {
             if (status === 401) {
                 $location.path('/register');
-                alert('You need to be logged in to go here!');
+//                alert('You need to be logged in to go here!');
             }
         });
 

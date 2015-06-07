@@ -1,0 +1,17 @@
+{
+  "globals"   : {
+    "describe"   : false,
+    "it"         : false,
+    "before"     : false,
+    "beforeEach" : false,
+    "after"      : false,
+    "afterEach"  : false,
+    "angular"    : false,
+    "WebSocket"  : false,
+    "require"    : false,
+    "__dirname"  : false,
+    "module"     : false,
+    "process"    : false,
+    "console"    : false
+  }
+}
