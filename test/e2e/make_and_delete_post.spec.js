@@ -1,40 +1,41 @@
+'use strict';
+
 var expect = require('chai').expect;
 
 var util = require('./util');
 
 describe('create, modify, and delete albums', function () {
-    it('should make a post which becomes the first in the list', function () {
-        var username = util.loginAndGetUsername();
+   it('should make a post which becomes the first in the list', function (done) {
+       var username = util.loginAndGetUsername();
 
-        // find existing elements to verify that adding an item expands the list by one
-        element.all(by.repeater('album in albums')).then(function (albums) {
-            var albumCountBeforeInserting = albums.length;
+       // find existing elements to verify that adding an item expands the list by one
+       element.all(by.repeater('album in albums')).then(function (albums) {
+           var albumCountBeforeInserting = albums.length;
 
-            var randomAlbum = insertRandomAlbum();
+           var randomAlbum = insertRandomAlbum();
 
-            element.all(by.repeater('album in albums')).then(function (albums) {
-                var albumCountAfterInserting = albums.length;
+           element.all(by.repeater('album in albums')).then(function (albums) {
+               var albumCountAfterInserting = albums.length;
 
-                expect(albumCountAfterInserting).to.equal(albumCountBeforeInserting + 1);
+               expect(albumCountAfterInserting).to.equal(albumCountBeforeInserting + 1);
 
-                // verify that the inserted element is first in the list
-                var firstElement = albums[0];
+               // verify that the inserted element is first in the list
+               var firstElement = albums[0];
+               firstElement.element(by.binding('album.title')).getText().then(function (actualAlbumTitle) {
+                   expect(actualAlbumTitle).to.equal(randomAlbum.title);
+               });
 
-                firstElement.element(by.binding('album.title')).getText().then(function (actualAlbumTitle) {
-                    expect(actualAlbumTitle).to.equal(randomAlbum.title);
-                });
+               firstElement.element(by.binding('album.artist')).getText().then(function (actualArtistName) {
+                   expect(actualArtistName).to.equal(randomAlbum.artist);
+               });
 
-                firstElement.element(by.binding('album.artist')).getText().then(function (actualArtistName) {
-                    expect(actualArtistName).to.equal(randomAlbum.artist);
-                });
-
-                // also verify that the creator is set to the logged-in user's username
-                firstElement.element(by.binding('album.creator')).getText().then(function (actualCreator) {
-                    expect(actualCreator).to.equal(username);
-                });
-            });
-        });
-    });
+               // also verify that the creator is set to the logged-in user's username
+               firstElement.element(by.binding('album.creator')).getText().then(function (actualCreator) {
+                   expect(actualCreator).to.equal(username);
+               });
+           });
+       });
+   });
 
     it('should insert and delete an album, and verify that it is no longer in the list', function () {
         var username = util.loginAndGetUsername();

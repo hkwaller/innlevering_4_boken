@@ -9,8 +9,7 @@ module.exports = function(config) {
             'angular/node_modules/angular-mocks/angular-mocks.js',
             'angular/js/app.js',
             'angular/js/controllers.js',
-            'angular/js/services.js',
-            'test/angular/**/*.js'
+            'angular/js/services.js'
         ],
         reporters: ['progress'],
         port: 9876,

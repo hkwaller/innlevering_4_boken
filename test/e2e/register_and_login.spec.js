@@ -1,3 +1,5 @@
+'use strict';
+
 var expect = require('chai').expect;
 
 var util = require('./util');
@@ -26,24 +28,24 @@ describe('register, login, and log out', function () {
         });
     });
 
-    it('should log in as a user, then log out and in as another user', function () {
-        var username = util.loginAndGetUsername();
+   it('should log in as a user, then log out and in as another user', function (done) {
+       var username = util.loginAndGetUsername();
 
-        // we already know that the correct username is displayed on first login, so just log back out
-        element(by.css('.logout')).click();
+       // we already know that the correct username is displayed on first login, so just log back out
+       element(by.css('.logout')).click();
 
-        // we have been redirected back to the login/register page as asserted by the previous test.
-        // register->login should be the same as just logging in
-        var secondUsername = util.loginAndGetUsername();
+       // we have been redirected back to the login/register page as asserted by the previous test.
+       // register->login should be the same as just logging in
+       var secondUsername = util.loginAndGetUsername();
 
-        // verify that we were redirected to the albums (home) page
-        browser.getCurrentUrl().then(function (url) {
-            expect(url).to.equal('http://localhost:7777/#/');
-        });
+       // verify that we were redirected to the albums (home) page
+       browser.getCurrentUrl().then(function (url) {
+           expect(url).to.equal('http://localhost:7777/#/');
+       });
 
-        // verify that the correct (second) username is showing
-        element(by.binding('currentUser.username')).getText().then(function (secondActualUsername) {
-            expect(secondActualUsername).to.equal(secondUsername);
-        });
-    });
+       // verify that the correct (second) username is showing
+       element(by.binding('currentUser.username')).getText().then(function (secondActualUsername) {
+           expect(secondActualUsername).to.equal(secondUsername);
+       });
+   });
 });

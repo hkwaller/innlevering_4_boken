@@ -1,3 +1,5 @@
+'use strict';
+
 var router = require('express').Router();
 var bcrypt = require('bcrypt');
 var jwt = require('jwt-simple');
@@ -17,7 +19,7 @@ router.post('/', function(req, res) {
                 user: user
             });
         } else {
-            return res.status(401).send('Something went wrong')
+            return res.status(401).send('Something went wrong');
         }
     });
 });

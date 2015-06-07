@@ -7,6 +7,7 @@
     "express": "^4.12.4",
     "gulp": "^3.8.11",
     "gulp-concat": "^2.5.2",
+    "gulp-live-server": "0.0.20",
     "gulp-minify-html": "^1.0.2",
     "gulp-ng-annotate": "^1.0.0",
     "gulp-nodemon": "^2.0.3",
@@ -19,8 +20,11 @@
     "lodash": "^3.7.0",
     "morgan": "^1.5.3"
   },
+  "config": {
+    "unsafe-perm": true
+  },
   "scripts": {
-    "postinstall": "cd angular && npm install && cd ../server && npm install",
+    "postinstall": "cd angular && npm install && cd .. && cd server && npm install && cd .. && ./node_modules/.bin/webdriver-manager update",
     "test": "./node_modules/.bin/jshint . && ./node_modules/.bin/mocha -R nyan && ./node_modules/.bin/protractor",
     "start": "gulp dev"
   },
@@ -38,4 +42,3 @@
     "supertest": "^1.0.1"
   }
 }
-   

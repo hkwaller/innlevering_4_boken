@@ -13,6 +13,7 @@ exports.create = function(username, password, cb) {
         if (err) { return cb(err); }
         
         user.passwordHash = hash;
+
         user.save(function(err) {
             if (err) { return cb(err); }
             user.token = jwt.sign({

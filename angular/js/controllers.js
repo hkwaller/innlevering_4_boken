@@ -1,3 +1,8 @@
+'use strict';
+
+var _ = require('lodash');
+var alert = alert;
+
 angular.module('app.controllers', [])
 
 .controller('ApplicationController', function ($scope, $location, SessionsService) {
@@ -107,4 +112,4 @@ angular.module('app.controllers', [])
 
 .controller('NotFoundController', function ($scope) {
     $scope.message = 'Not found!';
-})
+});

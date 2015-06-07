@@ -3,9 +3,7 @@
     KOMMENTARER
 *****************/
 
-Det mangler fortsatt noen tester, noe som fremgår i coverage.html.
-
-Dette vil bli fikset til neste levering.
+Coverage.html rapporterer nå om 100% dekkende testing (minus sockets da). Alle de relevante filene på server vises som dekket og testene blir gjennomført.
 
 
 /****************
@@ -31,6 +29,22 @@ Kun de filene som er relevante. Ikke server filer som andre ikke skal ha tilgang
 3. Hvilke viktige fordeler er det å hente ved å ”kompilere” (minify-e og obfuskere) statiske kode-assets (HTML, CSS, og JavaScript)?
 
 Gjøre det vanskeligere for andre å se koden men frem for alt å få en raskere applikasjon ved fjerning av unødvendige tegn, whitespaces og linjer etc.
+
+<<<<<<< TILLEGG >>>>>>>>>>>
+
+- Savner noen eksempler på forskjellen på IaaS og PaaS – hva merker man spesifikt når man deployer en Node-applikasjon? Hvordan forholder man seg til dette?
+
+
+
+- Kommer hvilke filer man laster opp til produksjonsserver an på type deployment? Hvilke filer er relevante? "På produksjonsserver" betyr ikke nødvendigvis "offentlig tilgjengelig".
+
+
+
+
+
+- To viktige punkter trekkes frem om minification, men savner et tredje. Kan minification bidra til å minske antall HTTP-requests klienten må gjøre, og hva har dette å si for ytelse?
+
+Heh, her har du jo skrevet svaret, men ja, at minifisere flere filer til en fil sparer deg for HTTP-kall, det kan være bra av flere grunner. Blant annet blir det selvfølgelig færre kall, noe som minsker risken for at et kall skal feile. I tillegg så vil det gå kjappere å kun ha et kall istedenfor mange da det vil gå kjappere.
 
 
 
@@ -58,4 +72,23 @@ headeren og til slutt kan den også ligge som en parameter i URLen. Det finnes f
 4. Når bør man droppe støtte for eldre versjoner av et API?
 
 Når den enten ikke er sikker nog lenger eller når ingen bruker det lenger
+
+
+
+>>>> TILLEGG <<<<<
+
+- Bør man tenke på mulighet for å versjonere API-et enda tidligere enn når man faktisk trenger å oppgradere det?
+
+
+Selvfølgelig går det an å versjonere API:et tidligere, hvis det er nødvendig eller er logisk. Jeg mener det ikke finnes noe svar på når du burde versjonere ditt API, da dette vil være ulike for ulike prosjekter.
+
+
+- Savner et viktig problem med å legge API-versjon i URL: at det kan argumenteres for å være i strid med REST-paradigmet (siden versjonsnummer ikke har noen ting med den faktiske ressursen du er ute etter). Kan man gjøre begge deler? Hvordan _bør_ man respondere hvis man benytter Accept-headeren og klienten ikke spesifiserer noe? Hvordan bør dette kommuniseres til brukerne av API-et (som lager klienter)?
+
+
+- Kan det være noen konkrete endringer som fører til at man må slutte med å støtte gamle API-versjoner? Hvor lenge MÅ man støtte dem? Kommer dette an på antall/type kunder og eventuell betalingsmodell?
+
+Det kan være ny funksjonalitet som er så pass viktig eller dekkende at den blir en integral part av en applikasjon, da er det ikke sikkert en gammel versjon av et API fyller den funksjonalitet det burde gjøre og da er det ikke sikkert det finnes en god grunn å bruke det lenger. 
+
+Hva gjelder hvor lenge man må støtte et eldre API mener jeg igjen at det ikke finnes et svar. Man må se over hva man har, hva de eldre gjør og hvordan kundene får kommunisert med et API for å bestemme om det er grunn til å bruke det videre. Så ja, antall kunder eller eventuell betalingsmodell er absolutt relevant i mange tilfeller.
 

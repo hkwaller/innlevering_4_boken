@@ -1,5 +1,7 @@
 'use strict';
 
+var alert = alert;
+
 angular.module('app.services', [])
 
 .service('AlbumsService', function ($http) {

@@ -16,6 +16,7 @@ router.post('/', function (req, res) {
 
         var newUser = new User({
             username: req.body.username,
+            passwordHash: passwordHash,
             password: passwordHash
         });
         

@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports.loginAndGetUsername = function () {
     browser.get('http://localhost:7777/#/register');
 

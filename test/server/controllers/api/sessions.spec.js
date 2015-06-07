@@ -1,9 +1,11 @@
-var api = require("../../support/api");
-var expect = require("chai").expect;
-var User = require("../../../../server/models/user");
-var testUser = require("../../support/user");
-var secretKey = require("../../../../server/secrets");
-var jwt = require("jwt-simple");
+'use strict';
+
+var api = require('../../support/api');
+var expect = require('chai').expect;
+var User = require('../../../../server/models/user');
+var testUser = require('../../support/user');
+var secretKey = require('../../../../server/secrets');
+var jwt = require('jwt-simple');
 var ctrl = require('../../../../server/controllers/sessions');
 
 describe('controllers.sessions', function() {
